@@ -32,3 +32,16 @@ class Users(db.Model, UserMixin):
         db.session.commit( )
 
         return self 
+    
+
+class Order(db.Model):
+    __tablename__ = 'Orders'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    terminal_id = db.Column(db.Integer)
+    port_id = db.Column(db.Integer)
+    client_longitud = db.Column(db.Float)
+    client_latitud = db.Column(db.Float)
+    client_name = db.Column(db.String(200))
+    client_vat = db.Column(db.String(13))
+    client_address = db.Column(db.String(255))

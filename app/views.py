@@ -15,7 +15,7 @@ from jinja2              import TemplateNotFound
 # App modules
 from app        import app, lm, db, bc
 from app.models import Users
-from app.forms  import LoginForm, RegisterForm
+from app.forms  import LoginForm, RegisterForm, OrdersForm
 
 # provide login manager with load_user callback
 @lm.user_loader
@@ -27,6 +27,12 @@ def load_user(user_id):
 def logout():
     logout_user()
     return redirect(url_for('index'))
+@app.route('/orders')
+def orders():
+    form = OrdersForm()
+    return render_template('orders.html', form=form)
+
+
 
 # Register a new user
 @app.route('/register', methods=['GET', 'POST'])
@@ -43,6 +49,7 @@ def register():
         return render_template( 'register.html', form=form, msg=msg )
 
     # check if both http method is POST and form is valid on submit
+    
     if form.validate_on_submit():
 
         # assign form data to variables
